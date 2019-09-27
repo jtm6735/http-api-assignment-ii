@@ -21,8 +21,8 @@ const getUsers = (request, response) => {
   respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersMeta = (request,response,status) => respondJSONMeta(request, response, 200);
-const notFoundMeta = (request,response) => respondJSONMeta(request,response,404);
+const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200);
+const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 
 
 const addUser = (request, response, body) => {
@@ -37,16 +37,16 @@ const addUser = (request, response, body) => {
 
   let responseCode = 201;
 
-   if (users[body.name]) {
-        responseCode = 204;
-    } else {
-        users[body.name] = {};
+  if (users[body.name]) {
+    responseCode = 204;
+  } else {
+    users[body.name] = {};
   }
 
   users[body.name].name = body.name;
   users[body.name].age = body.age;
 
-if (responseCode === 201) {
+  if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
     return respondJSON(request, response, responseCode, responseJSON);
   }
