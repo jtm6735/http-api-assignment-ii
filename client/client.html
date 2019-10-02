@@ -61,7 +61,8 @@
       
       const nameField = nameForm.querySelector('#nameField');
       const ageField = nameForm.querySelector('#ageField');
-      
+      const locationField = nameForm.querySelector('#locationField');
+        
       const xhr = new XMLHttpRequest();
       xhr.open(nameMethod, nameAction);
       
@@ -69,7 +70,7 @@
       xhr.setRequestHeader ('Accept', 'application/json');
       xhr.onload = () => handleResponse(xhr,true);
       
-      const formData = `name=${nameField.value}&age=${ageField.value}`;
+      const formData = `name=${nameField.value}&age=${ageField.value}&location=${locationField.value}`;
       
       xhr.send(formData);
     

@@ -27,10 +27,10 @@ const notFoundMeta = (request, response) => respondJSONMeta(request, response, 4
 
 const addUser = (request, response, body) => {
   const responseJSON = {
-    message: 'Name and age are both required.',
+    message: 'Name, age, and location are all required.',
   };
 
-  if (!body.name || !body.age) {
+  if (!body.name || !body.age || !body.location ) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -45,6 +45,7 @@ const addUser = (request, response, body) => {
 
   users[body.name].name = body.name;
   users[body.name].age = body.age;
+  users[body.name].location = body.age;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
