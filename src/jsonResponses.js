@@ -27,10 +27,10 @@ const notFoundMeta = (request, response) => respondJSONMeta(request, response, 4
 
 const addUser = (request, response, body) => {
   const responseJSON = {
-    message: 'Name, age, and location are all required.',
+    message: 'Name,location, and an image link are all required.',
   };
 
-  if (!body.name || !body.age || !body.location ) {
+  if (!body.name || !body.location || !body.image) {
     responseJSON.id = 'missingParams';
     return respondJSON(request, response, 400, responseJSON);
   }
@@ -44,11 +44,12 @@ const addUser = (request, response, body) => {
   }
 
   users[body.name].name = body.name;
-  users[body.name].age = body.age;
-  users[body.name].location = body.age;
+  users[body.name].location = body.location;
+  users[body.name].image = body.image;
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
+    responseJSON.image = body.image;  
     return respondJSON(request, response, responseCode, responseJSON);
   }
   return respondJSONMeta(request, response, responseCode);
