@@ -21,7 +21,16 @@
         const users = JSON.stringify(obj.users);
         userList.textContent = users;
         content.appendChild(userList);
-      }
+      }    
+          
+      if(obj.image){
+          console.dir(obj.image);
+          const imgList = document.createElement('img');
+          const userPhoto = obj.image;
+          imgList.src = userPhoto;
+          content.appendChild(imgList);
+      }      
+        
     };
     const handleResponse = (xhr,parseResponse) => {
       const content = document.querySelector('#content');
@@ -60,8 +69,9 @@
       const nameMethod = nameForm.getAttribute('method');
       
       const nameField = nameForm.querySelector('#nameField');
-      const ageField = nameForm.querySelector('#ageField');
+      //const ageField = nameForm.querySelector('#ageField');
       const locationField = nameForm.querySelector('#locationField');
+      const imageField = nameForm.querySelector('#imageField');
         
       const xhr = new XMLHttpRequest();
       xhr.open(nameMethod, nameAction);
@@ -70,7 +80,7 @@
       xhr.setRequestHeader ('Accept', 'application/json');
       xhr.onload = () => handleResponse(xhr,true);
       
-      const formData = `name=${nameField.value}&age=${ageField.value}&location=${locationField.value}`;
+      const formData = `name=${nameField.value}&location=${locationField.value}&image=${imageField.value}`;
       
       xhr.send(formData);
     
@@ -114,11 +124,11 @@
     <form id="nameForm" action="/addUser" method="post">
       <label for="name">Name: </label>
       <input id="nameField" type="text" name="name" />
-      <label for="age">Age: </label>
-      <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
       <label for="location">Location: </label>
       <input id="locationField" type="text" name="location"/>
-      <input type="submit" value="Add User" />
+      <label for="image">Image: </label>
+      <input id="imageField" type="url" name="image">
+      <input type="submit" value="Add User" />    
     </form>
     <form id="userForm" action="/getUsers" method="get">
       <select id='urlField'>
