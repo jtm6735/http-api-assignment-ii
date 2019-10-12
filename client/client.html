@@ -17,36 +17,43 @@
       }
       
       if(obj.users) {
-        const userList = document.createElement('p');
-        const users = JSON.stringify(obj.users);
-        userList.textContent = users;
-        content.appendChild(userList);
-      }    
-          
-      if(obj.image){
-          console.dir(obj.image);
-          const imgList = document.createElement('img');
-          const userPhoto = obj.image;
-          imgList.src = userPhoto;
-          content.appendChild(imgList);
-      }      
-        
+          console.log("test");
+//        const userList = document.createElement('p');
+//        const users = JSON.stringify(obj.users);
+//        userList.textContent = users;
+//        content.appendChild(userList);
+          for(let key in obj.users){
+              if(obj.users.hasOwnProperty(key)){
+              const div = document.createElement('div');
+              const name = document.createElement('p');
+              const img = document.createElement('IMG');
+              
+              name.innerHTML = '<p>Cryptid Name: </p>' + obj.users[key].name;
+              
+              img.setAttribute('src', obj.users[key].image);
+              div.appendChild(img);
+              div.appendChild(name);
+              content.appendChild(div); 
+              }
+          }
+      }        
     };
+
     const handleResponse = (xhr,parseResponse) => {
       const content = document.querySelector('#content');
       
       switch(xhr.status) {
         case 200:
-          content.innerHTML = `<b>Success</b>`;
+          content.innerHTML = `<b>Creature has succesfully been logged</b>`;
           break;
         case 201:
-          content.innerHTML = '<b>Create</b>';
+          content.innerHTML = '<b>Log the Creature</b>';
           break;
         case 204:
-          content.innerHTML = '<b>Updated (No Content)</b>';
+          content.innerHTML = '<b>Log Updated</b>';
           return;
         case 400:
-          content.innerHTML = `<b>Bad Request</b>`;
+          content.innerHTML = `<b>Not all of the forms have been filled out</b>`;
           break;
         case 404:
         content.innerHTML = `<b>Resource Not Found</b>`;
@@ -69,7 +76,6 @@
       const nameMethod = nameForm.getAttribute('method');
       
       const nameField = nameForm.querySelector('#nameField');
-      //const ageField = nameForm.querySelector('#ageField');
       const locationField = nameForm.querySelector('#locationField');
       const imageField = nameForm.querySelector('#imageField');
         

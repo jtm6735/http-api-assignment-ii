@@ -1,4 +1,15 @@
-const users = {};
+const users = {
+    'College Students': {
+        name: 'College Students',
+        location: 'Any College Campus',
+        image: 'https://www.thejambar.com/wp-content/uploads/2014/02/videogame.jpg'
+    },
+    'Lemon':{
+        name:'Lemon',
+        location: 'Riddle of the Rocks',
+        image: 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-1.2.1&w=1000&q=80',
+    },
+};
 
 const respondJSON = (request, response, status, object) => {
   response.writeHead(status, { 'Content-Type': 'application/json' });
@@ -49,7 +60,6 @@ const addUser = (request, response, body) => {
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
-    responseJSON.image = body.image;  
     return respondJSON(request, response, responseCode, responseJSON);
   }
   return respondJSONMeta(request, response, responseCode);
